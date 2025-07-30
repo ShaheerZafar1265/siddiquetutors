@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - STNA - Siddique Tutors Network Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-light: #64748b;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --border: #e2e8f0;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #0ea5e9 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 50%, #3b82f6 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #f8fafc 50%, #f1f5f9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.08;
+            animation: float-shapes 25s infinite linear;
+            border-radius: 50%;
+        }
+
+        .shape:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+        }
+
+        .shape:nth-child(2) {
+            left: 80%;
+            top: 40%;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-secondary);
+            animation-delay: 8s;
+        }
+
+        .shape:nth-child(3) {
+            left: 60%;
+            top: 10%;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            animation-delay: 16s;
+        }
+
+        @keyframes float-shapes {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(360deg);
+            }
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Header Styles */
+        .header {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Sansation', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .about-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: gold;
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            animation: float-badge 3s ease-in-out infinite;
+        }
+
+        @keyframes float-badge {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .about-title {
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-subtitle {
+            font-size: clamp(16px, 3vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* Mission Vision Section */
+        .mission-vision {
+            padding: 80px 0;
+            margin: 60px 0;
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .mv-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-primary);
+        }
+
+        .mv-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .mv-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .mv-card h3 {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .mv-card p {
+            font-size: clamp(14px, 2vw, 16px);
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            margin: 60px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .team-card {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: 900;
+        }
+
+        .team-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .team-card .position {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Features Section (Why Choose STNA) */
+        .features {
+            padding: 80px 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            margin: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(14px, 3vw, 20px);
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 900;
+            color: white;
+            background: var(--gradient-primary);
+        }
+
+        .feature-title {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-text {
+            font-size: clamp(13px, 2vw, 16px);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 80px 0;
+            margin: 60px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .value-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Vision Timeline Styles - FIXED */
+        .vision-timeline {
+            padding: 80px 0;
+            margin: 60px 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        /* Left side content (year info) */
+        .timeline-year {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .year-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .year-info h4 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .year-info span {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .year-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Center connector */
+        .timeline-connector {
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--primary-light), var(--accent));
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .timeline-connector::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Right side content (timeline bubble) */
+        .timeline-bubble {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 30px;
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-bubble:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Bubble colors for different items */
+        .timeline-item:nth-child(1) .timeline-bubble {
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            color: white;
+        }
+
+        .timeline-item:nth-child(2) .timeline-bubble {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .timeline-item:nth-child(3) .timeline-bubble {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+        }
+
+        .timeline-item:nth-child(4) .timeline-bubble {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .timeline-item:nth-child(5) .timeline-bubble {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .timeline-item:nth-child(6) .timeline-bubble {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Current year highlighting */
+        .current-year .year-number {
+            background: var(--gradient-accent);
+            animation: pulse-current 2s ease-in-out infinite;
+        }
+
+        .current-year .year-info h4 {
+            color: var(--success);
+        }
+
+        /* Future year styling */
+        .future-year {
+            opacity: 0.8;
+        }
+
+        .future-year .timeline-bubble {
+            border: 2px dashed var(--border);
+        }
+
+        .future-year .year-number {
+            background: linear-gradient(135deg, var(--text-light), var(--text-secondary));
+        }
+
+        @keyframes pulse-current {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: var(--shadow-soft);
+            }
+
+            50% {
+                transform: scale(1.1);
+                box-shadow: var(--shadow-medium);
+            }
+        }
+
+        /* Timeline Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .vision-timeline {
+                padding: 60px 0;
+                border-radius: 20px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+                margin-bottom: 30px;
+                gap: 20px;
+            }
+
+            .timeline-bubble {
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .timeline-connector {
+                height: 40px;
+                justify-self: center;
+            }
+
+            .timeline-year {
+                padding: 0 20px;
+            }
+
+            .year-info {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-bubble {
+                padding: 20px;
+            }
+
+            .timeline-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .year-number {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--text-primary);
+            padding: 60px 0 30px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            color: white;
+        }
+
+        .footer-logo {
+            font-family: 'Sansation', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-block;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 20px;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .developer-credit {
+            font-size: 12px;
+            color: #94a3b8;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .developer-credit a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .developer-credit a:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+        .developer-credit:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-glass);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                box-shadow: var(--shadow-soft);
+                border-radius: 0 0 20px 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .about-hero {
+                padding: 120px 0 60px;
+            }
+
+            .features-grid,
+            .mv-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .team-section,
+            .features,
+            .values-section,
+            .director-message {
+                padding: 60px 15px;
+                border-radius: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                width: auto;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .footer {
+                padding: 40px 0 20px;
+                border-radius: 20px 20px 0 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mv-card,
+            .feature-card {
+                padding: 30px 20px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                padding: 0 5px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+
+        .director-message {
+            padding: 80px 0;
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .message-box {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            padding: 40px;
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (max-width: 768px) {
+            .message-box {
+                padding: 30px 20px;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+        }
+
+        .message-box h4 {
+            margin-top: 20px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo"><a href="index.html">STNA.</a></div>
+            <ul class="nav-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="find-tutor.html">Find a Tutor</a></li>
+                <li><a href="become-tutor.html">Become a Tutor</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="career.html">Career</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span>☰</span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- About Hero Section -->
+        <section class="about-hero" id="about">
+            <div class="about-hero-content">
+                <div class="hero-badge fade-in">🌟 Transforming Education Since 2020</div>
+                <h1 class="about-title fade-in">About STNA</h1>
+                <p class="about-subtitle fade-in">
+                    We're not just another tutoring service – we're education revolutionaries committed to unlocking
+                    every student's potential through innovative teaching methods and personalized learning experiences.
+                </p>
+            </div>
+        </section>
+
+        <!-- Vision Timeline Section -->
+        <section class="vision-timeline">
+            <h2 class="section-title">Our Vision: 2021 to 2028</h2>
+            <p class="section-subtitle">A roadmap of our strategic goals and milestones as we transform education across
+                Pakistan</p>
+
+            <div class="timeline-container">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">
+                        <span class="year-number">01</span>
+                        <div class="year-info">
+                            <h4>FOUNDATION</h4>
+                            <span>2021</span>
+                            <p>Started our journey with a clear mission to revolutionize education through technology
+                                and personalized learning approaches.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">🚀</div>
+                        <div class="timeline-content">
+                            <p>Launched STNA with 500 students and 50 qualified tutors across Karachi, establishing our
+                                foundation in personalized education.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">
+                        <span class="year-number">02</span>
+                        <div class="year-info">
+                            <h4>DIGITAL GROWTH</h4>
+                            <span>2022</span>
+                            <p>Integrated cutting-edge technology to enhance learning experiences and expanded our reach
+                                across major cities.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">📱</div>
+                        <div class="timeline-content">
+                            <p>Expanded to 3,000 students with advanced AI-powered matching system and launched our
+                                mobile learning platform.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">
+                        <span class="year-number">03</span>
+                        <div class="year-info">
+                            <h4>STRATEGIC PARTNERSHIPS</h4>
+                            <span>2023</span>
+                            <p>Built strong alliances with educational institutions and expanded our specialized program
+                                offerings nationwide.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">🤝</div>
+                        <div class="timeline-content">
+                            <p>Reached 8,000 students, formed partnerships with top universities, and introduced
+                                specialized exam preparation programs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in current-year">
+                    <div class="timeline-year">
+                        <span class="year-number">04</span>
+                        <div class="year-info">
+                            <h4>EXCELLENCE ACHIEVED</h4>
+                            <span>2024</span>
+                            <p>Established ourselves as Pakistan's leading tutoring network with proven results and
+                                international recognition.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">📊</div>
+                        <div class="timeline-content">
+                            <p>Serving 15,000+ students with 98% success rate, launched international curriculum support
+                                and advanced analytics dashboard.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in future-year">
+                    <div class="timeline-year">
+                        <span class="year-number">05</span>
+                        <div class="year-info">
+                            <h4>REGIONAL EXPANSION</h4>
+                            <span>2025</span>
+                            <p>Scale operations across South Asia while pioneering next-generation immersive learning
+                                technologies.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">🌍</div>
+                        <div class="timeline-content">
+                            <p>Target 50,000 students, expand to neighboring countries, and introduce VR/AR learning
+                                experiences for immersive education.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in future-year">
+                    <div class="timeline-year">
+                        <span class="year-number">06</span>
+                        <div class="year-info">
+                            <h4>MARKET LEADERSHIP</h4>
+                            <span>2026-2028</span>
+                            <p>Establish STNA as the definitive educational solution with global recognition and impact
+                                on millions of students.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-connector"></div>
+                    <div class="timeline-bubble">
+                        <div class="timeline-icon">🌐</div>
+                        <div class="timeline-content">
+                            <p>Become the leading educational platform in South Asia with 100,000+ students and
+                                AI-driven personalized learning for every child.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision">
+        <div class="container">
+            <h2 class="section-title">Mission & Vision</h2>
+            <div class="mv-grid">
+                <div class="mv-card fade-in">
+                    <div class="mv-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To democratize quality education by connecting students with exceptional tutors, leveraging
+                        innovative technology and personalized learning approaches to ensure every student achieves
+                        their academic goals and reaches their full potential.
+                    </p>
+                </div>
+                <div class="mv-card fade-in">
+                    <div class="mv-icon">🌟</div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        To become the leading educational network in South Asia, transforming how students learn and
+                        grow, while building a community of passionate educators who inspire the next generation of
+                        leaders and innovators.
+                    </p>
+                </div>
+                <div class="mv-card fade-in">
+                    <div class="mv-icon">💎</div>
+                    <h3>Our Values</h3>
+                    <p>
+                        Guided by integrity, passion, innovation, and a commitment to excellence, our values shape every
+                        decision we
+                        make—ensuring accessibility, growth, and personalized support for every learner and educator in
+                        our network.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">The passionate educators and innovators behind STNA's success</p>
+            <div class="team-grid">
+                <div class="team-card fade-in">
+                    <div class="team-avatar">MS</div>
+                    <h4>Mr. Ebad Siddique</h4>
+                    <div class="position">Founder & CEO</div>
+                    <p>Visionary educator with 15+ years of experience in transforming educational landscapes across
+                        Pakistan.</p>
+                </div>
+                <div class="team-card fade-in">
+                    <div class="team-avatar">AK</div>
+                    <h4>Mr. Hasham Uddin</h4>
+                    <div class="position">Head of Academics</div>
+                    <p>PhD in Education, specializing in personalized learning methodologies and curriculum development.
+                    </p>
+                </div>
+                <div class="team-card fade-in">
+                    <div class="team-avatar">RA</div>
+                    <h4>Mr. Shaheer Zafar</h4>
+                    <div class="position">Technology Director</div>
+                    <p>Tech innovator building cutting-edge educational platforms and AI-powered learning solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose STNA Section -->
+    <section class="features section" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose STNA?</h2>
+            <p class="section-subtitle">
+                We're revolutionizing education in Pakistan with innovative teaching methods, world-class tutors, and
+                personalized learning experiences that guarantee results.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Personalized Learning</h3>
+                    <p class="feature-text">Every student is unique. Our AI-powered matching system pairs you with
+                        tutors who understand your learning style, pace, and goals for maximum effectiveness.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⭐</div>
+                    <h3 class="feature-title">Elite Tutors</h3>
+                    <p class="feature-text">Our tutors are the top 1% - PhD holders, university professors, and subject
+                        matter experts with proven track records of student success.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Smart Platform</h3>
+                    <p class="feature-text">Interactive whiteboards, real-time progress tracking, recorded sessions, and
+                        mobile apps that make learning engaging and accessible anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Core Values</h2>
+            <p class="section-subtitle">The principles that guide everything we do at STNA</p>
+            <div class="values-grid">
+                <div class="value-card fade-in">
+                    <span class="value-icon">💡</span>
+                    <h4>Innovation</h4>
+                    <p>We continuously evolve our methods and technology to provide cutting-edge educational solutions.
+                    </p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🤝</span>
+                    <h4>Integrity</h4>
+                    <p>We build trust through transparency, honesty, and consistent delivery of our promises.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🎓</span>
+                    <h4>Excellence</h4>
+                    <p>We strive for the highest standards in everything we do, from tutor selection to student
+                        outcomes.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🌍</span>
+                    <h4>Accessibility</h4>
+                    <p>Quality education should be available to everyone, regardless of location or economic background.
+                    </p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">📈</span>
+                    <h4>Growth</h4>
+                    <p>We believe in continuous improvement and lifelong learning for both students and educators.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">❤️</span>
+                    <h4>Passion</h4>
+                    <p>We're driven by genuine love for education and seeing our students succeed and thrive.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🧠</span>
+                    <h4>Expertise</h4>
+                    <p>Our team consists of subject specialists who bring deep knowledge and effective teaching
+                        strategies.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🛠️</span>
+                    <h4>Customization</h4>
+                    <p>We tailor learning experiences to individual student needs, ensuring effective and personalized
+                        growth.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">📚</span>
+                    <h4>Resourcefulness</h4>
+                    <p>We equip students with comprehensive resources to support learning beyond the classroom.</p>
+                </div>
+                <div class="value-card fade-in">
+                    <span class="value-icon">🔒</span>
+                    <h4>Security</h4>
+                    <p>We ensure a safe and secure learning environment, protecting student data and privacy at every
+                        step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="director-message">
+        <div class="container">
+            <h2 class="section-title">Message from the Director</h2>
+            <p class="section-subtitle">
+                A note from our founder, Mr. Ebad Siddique, sharing STNA's vision and commitment to education.
+            </p>
+            <div class="message-box fade-in">
+                <p>
+                    "At STNA, our mission is to empower every student through personalized education and innovative
+                    tools. We believe in creating opportunities, nurturing talent, and ensuring quality education
+                    reaches every corner of Pakistan and beyond. Thank you for trusting us as your partners in
+                    learning."
+                </p>
+                <h4>- Mr. Ebad Siddique, Founder & CEO</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">STNA.</div>
+                    <p class="footer-desc">
+                        Siddique Tutors Network Agency is dedicated to providing premium, personalized education across
+                        Pakistan.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" class="social-link" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" class="social-link" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" class="social-link" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#online-tutoring">Online Tutoring</a></li>
+                        <li><a href="services.html#home-tutoring">Home Tutoring</a></li>
+                        <li><a href="services.html#exam-prep">Exam Preparation</a></li>
+                        <li><a href="services.html#group-classes">Group Classes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="find-tutor.html">Find a Tutor</a></li>
+                        <li><a href="become-tutor.html">Become a Tutor</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2025 STNA – Siddique Tutors Network Agency. All rights reserved.</span>
+                <span class="developer-credit">
+                    <a href="https://www.linkedin.com/in/muhammad-shaheer-zafar-146a08356/" target="_blank"
+                        rel="noopener noreferrer">
+                        Developed By Shaheer Zafar
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const header = document.querySelector('.header');
+
+            // Toggle navigation
+            navToggle?.addEventListener('click', function () {
+                navLinks?.classList.toggle('active');
+                const isActive = navLinks?.classList.contains('active');
+                navToggle.innerHTML = isActive ? '✕' : '☰';
+
+                // Prevent body scrolling when menu is open
+                if (isActive) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Close nav when clicking links
+            navLinks?.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    navToggle.innerHTML = '☰';
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.backdropFilter = 'blur(30px)';
+                    header.style.boxShadow = 'var(--shadow-soft)';
+                } else {
+                    header.style.background = 'var(--bg-glass)';
+                    header.style.backdropFilter = 'blur(20px)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+
+</html>

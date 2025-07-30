@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Tutor - STNA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sansation" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-light: #64748b;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --border: #e2e8f0;
+            --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #0ea5e9 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 50%, #3b82f6 100%);
+            --gradient-accent: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #f8fafc 50%, #f1f5f9 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.08;
+            animation: float-shapes 25s infinite linear;
+            border-radius: 50%;
+        }
+
+        .shape:nth-child(1) {
+            left: 10%;
+            top: 20%;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+        }
+
+        .shape:nth-child(2) {
+            left: 80%;
+            top: 40%;
+            width: 120px;
+            height: 120px;
+            background: var(--gradient-secondary);
+            animation-delay: 8s;
+        }
+
+        .shape:nth-child(3) {
+            left: 60%;
+            top: 10%;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-accent);
+            animation-delay: 16s;
+        }
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid var(--primary-light);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .info-box p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @keyframes float-shapes {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .header {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Sansation', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 140px 0 80px;
+            min-height: 100vh;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .form-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .form-subtitle {
+            font-size: clamp(16px, 3vw, 20px);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tutor-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .form-step {
+            margin-bottom: 40px;
+        }
+
+        .step-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-number {
+            background: var(--gradient-primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 16px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            font-size: 16px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--primary-light);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .checkbox-item.checked {
+            border-color: var(--primary);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+        }
+
+        .radio-item:hover {
+            border-color: var(--primary-light);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .radio-item.checked {
+            border-color: var(--primary);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 250px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+            color: var(--success);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--text-primary);
+            padding: 60px 0 30px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            color: white;
+        }
+
+        .footer-logo {
+            font-family: 'Sansation', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-block;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .footer-links a::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 20px;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .developer-credit {
+            font-size: 12px;
+            color: #94a3b8;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .developer-credit a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .developer-credit a:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+        .developer-credit:hover {
+            opacity: 1;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-glass);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                box-shadow: var(--shadow-soft);
+                border-radius: 0 0 20px 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .form-section {
+                padding: 120px 0 60px;
+            }
+
+            .tutor-form {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .checkbox-group,
+            .radio-group {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100%;
+                padding: 16px 32px;
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo"><a href="index.html">STNA.</a></div>
+            <ul class="nav-links">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="find-tutor.html">Find a Tutor</a></li>
+                <li><a href="become-tutor.html">Become a Tutor</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="career.html">Career</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span>☰</span>
+            </button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Form Section -->
+        <section class="form-section">
+            <div class="form-header fade-in">
+                <h1 class="form-title">Find Your Perfect Tutor</h1>
+                <p class="form-subtitle">
+                    Tell us about your learning needs and we'll match you with the ideal tutor from our network of expert educators.
+                </p>
+            </div>
+
+            <form class="tutor-form fade-in" id="tutorForm">
+                <div class="success-message" id="successMessage">
+                    🎉 Your request has been submitted successfully! Our team will contact you within 24 hours to match you with the perfect tutor.
+                </div>
+                <div class="info-box">
+                    <h4>Why Join STNA?</h4>
+                    <p>Join Pakistan's most trusted tutoring network and enjoy flexible schedules, competitive compensation, professional development opportunities, and access to quality students. We provide ongoing support and resources to help you succeed.</p>
+                </div>
+                <!-- Student Information -->
+                <div class="form-step">
+                    <h3 class="step-title">
+                        <span class="step-number">1</span>
+                        Student Information
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentName">Student Name <span style="color: red;">*</span></label>
+                            <input type="text" id="studentName" name="studentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="studentAge">Age <span style="color: red;">*</span></label>
+                            <input type="number" id="studentAge" name="studentAge" min="5" max="25" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentClass">Current Class/Level <span style="color: red;">*</span></label>
+                            <select id="currentClass" name="currentClass" required>
+                                <option value="">Select Class/Level</option>
+                                <option value="grade-1">Grade 1</option>
+                                <option value="grade-2">Grade 2</option>
+                                <option value="grade-3">Grade 3</option>
+                                <option value="grade-4">Grade 4</option>
+                                <option value="grade-5">Grade 5</option>
+                                <option value="grade-6">Grade 6</option>
+                                <option value="grade-7">Grade 7</option>
+                                <option value="grade-8">Grade 8</option>
+                                <option value="grade-9">Grade 9 (Matric Part 1)</option>
+                                <option value="grade-10">Grade 10 (Matric Part 2)</option>
+                                <option value="grade-11">Grade 11 (Inter Part 1)</option>
+                                <option value="grade-12">Grade 12 (Inter Part 2)</option>
+                                <option value="o-level">O Level</option>
+                                <option value="a-level">A Level</option>
+                                <option value="undergraduate">Undergraduate</option>
+                                <option value="graduate">Graduate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="curriculum">Curriculum <span style="color: red;">*</span></label>
+                            <select id="curriculum" name="curriculum" required>
+                                <option value="">Select Curriculum</option>
+                                <option value="matric">Matric (Local Board)</option>
+                                <option value="cambridge">Cambridge (O/A Level)</option>
+                                <option value="ib">International Baccalaureate (IB)</option>
+                                <option value="american">American Curriculum</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject Selection -->
+                <div class="form-step">
+                    <h3 class="step-title">
+                        <span class="step-number">2</span>
+                        Subject Requirements
+                    </h3>
+                    <div class="form-group">
+                        <label>Select Subjects (Choose all that apply) <span style="color: red;">*</span></label>
+                        <div class="checkbox-group" id="subjectGroup">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="math" name="subjects" value="mathematics">
+                                <label for="math">Mathematics</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="physics" name="subjects" value="physics">
+                                <label for="physics">Physics</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="chemistry" name="subjects" value="chemistry">
+                                <label for="chemistry">Chemistry</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="biology" name="subjects" value="biology">
+                                <label for="biology">Biology</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="english" name="subjects" value="english">
+                                <label for="english">English</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="urdu" name="subjects" value="urdu">
+                                <label for="urdu">Urdu</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="computer" name="subjects" value="computer">
+                                <label for="computer">Computer Science</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="economics" name="subjects" value="economics">
+                                <label for="economics">Economics</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherSubject" style="margin-top: 20px;">Other Subject (if not listed above)</label>
+                        <input type="text" id="otherSubject" name="otherSubject" placeholder="e.g., Statistics, Psychology, etc.">
+                    </div>
+                </div>
+
+                <!-- Tutoring Preferences -->
+                <div class="form-step">
+                    <h3 class="step-title">
+                        <span class="step-number">3</span>
+                        Tutoring Preferences
+                    </h3>
+                    <div class="form-group">
+                        <label>Preferred Learning Mode <span style="color: red;">*</span></label>
+                        <div class="radio-group" id="modeGroup">
+                            <div class="radio-item">
+                                <input type="radio" id="online" name="learningMode" value="online" required>
+                                <label for="online">Online</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="home" name="learningMode" value="home" required>
+                                <label for="home">Home Tutoring</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="center" name="learningMode" value="center" required>
+                                <label for="center">Learning Center</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="flexible" name="learningMode" value="flexible" required>
+                                <label for="flexible">Flexible</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="frequency" style="margin-top: 20px;">Frequency <span style="color: red;">*</span></label>
+                            <select id="frequency" name="frequency" required>
+                                <option value="">Select Frequency</option>
+                                <option value="1-per-week">1 day per week</option>
+                                <option value="2-per-week">2 days per week</option>
+                                <option value="3-per-week">3 days per week</option>
+                                <option value="4-per-week">4 days per week</option>
+                                <option value="5-per-week">5 days per week</option>
+                                <option value="daily">Daily</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration" style="margin-top: 20px;">Session Duration <span style="color: red;">*</span></label>
+                            <select id="duration" name="duration" required>
+                                <option value="">Select Duration</option>
+                                <option value="1-hour">1 hour</option>
+                                <option value="1.5-hours">1.5 hours</option>
+                                <option value="2-hours">2 hours</option>
+                                <option value="2.5-hours">2.5 hours</option>
+                                <option value="3-hours">3 hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Time Slots</label>
+                        <textarea id="preferredTime" name="preferredTime" rows="3" placeholder="e.g., Weekdays 4-6 PM, Weekends 10 AM-12 PM"></textarea>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-step">
+                    <h3 class="step-title">
+                        <span class="step-number">4</span>
+                        Contact Information
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="parentName">Parent/Guardian Name <span style="color: red;">*</span></label>
+                            <input type="text" id="parentName" name="parentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Contact Number <span style="color: red;">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="+92 300 1234567" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address <span style="color: red;">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City <span style="color: red;">*</span></label>
+                            <select id="city" name="city" required>
+                                <option value="">Select City</option>
+                                <option value="karachi">Karachi</option>
+                                <option value="lahore">Lahore</option>
+                                <option value="islamabad">Islamabad</option>
+                                <option value="rawalpindi">Rawalpindi</option>
+                                <option value="faisalabad">Faisalabad</option>
+                                <option value="multan">Multan</option>
+                                <option value="peshawar">Peshawar</option>
+                                <option value="quetta">Quetta</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Complete Address (for home tutoring)</label>
+                        <textarea id="address" name="address" rows="3" placeholder="Street address, area, landmarks"></textarea>
+                    </div>
+                </div>
+
+                <!-- Additional Requirements -->
+                <div class="form-step">
+                    <h3 class="step-title">
+                        <span class="step-number">5</span>
+                        Additional Requirements
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tutorGender">Tutor Gender Preference</label>
+                            <select id="tutorGender" name="tutorGender">
+                                <option value="">No Preference</option>
+                                <option value="male">Male Tutor</option>
+                                <option value="female">Female Tutor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget">Budget Range (per month) <span style="color: red;">*</span></label>
+                            <select id="budget" name="budget" required>
+                                <option value="">Select Budget Range</option>
+                                <option value="5000-10000">PKR 5,000 - 10,000</option>
+                                <option value="10000-15000">PKR 10,000 - 15,000</option>
+                                <option value="15000-20000">PKR 15,000 - 20,000</option>
+                                <option value="20000-30000">PKR 20,000 - 30,000</option>
+                                <option value="30000-50000">PKR 30,000 - 50,000</option>
+                                <option value="50000+">PKR 50,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="goals">Learning Goals & Objectives</label>
+                        <textarea id="goals" name="goals" rows="4" placeholder="What do you want to achieve? e.g., improve grades, exam preparation, concept clarity, etc."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="challenges" style="margin-top: 20px;">Current Challenges or Weak Areas</label>
+                        <textarea id="challenges" name="challenges" rows="3" placeholder="What specific topics or areas need improvement?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialRequirements" style="margin-top: 20px;">Special Requirements or Notes</label>
+                        <textarea id="specialRequirements" name="specialRequirements" rows="3" placeholder="Any special needs, learning disabilities, or additional requirements?"></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        Find My Perfect Tutor
+                    </button>
+                    <p style="margin-top: 15px; font-size: 14px; color: var(--text-secondary);">
+                        Our expert team will review your requirements and contact you within 24 hours with suitable tutor matches.
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">STNA.</div>
+                    <p class="footer-desc">
+                        Siddique Tutors Network Agency is dedicated to providing premium, personalized education across
+                        Pakistan.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" class="social-link" aria-label="Facebook"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" class="social-link" aria-label="Twitter"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" class="social-link" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com" class="social-link" aria-label="LinkedIn"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#online-tutoring">Online Tutoring</a></li>
+                        <li><a href="services.html#home-tutoring">Home Tutoring</a></li>
+                        <li><a href="services.html#exam-prep">Exam Preparation</a></li>
+                        <li><a href="services.html#group-classes">Group Classes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="find-tutor.html">Find a Tutor</a></li>
+                        <li><a href="become-tutor.html">Become a Tutor</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="faqs.html">FAQs</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2025 STNA – Siddique Tutors Network Agency. All rights reserved.</span>
+                <span class="developer-credit">
+                    <a href="https://www.linkedin.com/in/muhammad-shaheer-zafar-146a08356/" target="_blank"
+                        rel="noopener noreferrer">
+                        Developed By Shaheer Zafar
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const header = document.querySelector('.header');
+            const form = document.getElementById('tutorForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+
+            // Mobile Navigation
+            navToggle?.addEventListener('click', function() {
+                navLinks?.classList.toggle('active');
+                const isActive = navLinks?.classList.contains('active');
+                navToggle.innerHTML = isActive ? '✕' : '☰';
+            });
+
+            // Close nav when clicking links
+            navLinks?.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    navToggle.innerHTML = '☰';
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.backdropFilter = 'blur(30px)';
+                    header.style.boxShadow = 'var(--shadow-soft)';
+                } else {
+                    header.style.background = 'var(--bg-glass)';
+                    header.style.backdropFilter = 'blur(20px)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Checkbox and Radio interactions
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                
+                item.addEventListener('click', function(e) {
+                    if (e.target !== checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                    item.classList.toggle('checked', checkbox.checked);
+                });
+
+                checkbox.addEventListener('change', function() {
+                    item.classList.toggle('checked', checkbox.checked);
+                });
+            });
+
+            document.querySelectorAll('.radio-item').forEach(item => {
+                const radio = item.querySelector('input[type="radio"]');
+                
+                item.addEventListener('click', function(e) {
+                    if (e.target !== radio) {
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                });
+
+                radio.addEventListener('change', function() {
+                    // Remove checked class from all radio items in the same group
+                    document.querySelectorAll(`input[name="${radio.name}"]`).forEach(r => {
+                        r.closest('.radio-item').classList.remove('checked');
+                    });
+                    // Add checked class to selected item
+                    item.classList.add('checked');
+                });
+            });
+
+            // Form validation and submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Validate required fields
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.style.borderColor = 'var(--error)';
+                        field.addEventListener('input', function() {
+                            field.style.borderColor = 'var(--border)';
+                        }, { once: true });
+                    }
+                });
+
+                // Check if at least one subject is selected
+                const subjectChecked = form.querySelectorAll('input[name="subjects"]:checked').length > 0;
+                if (!subjectChecked) {
+                    isValid = false;
+                    document.getElementById('subjectGroup').style.borderColor = 'var(--error)';
+                    setTimeout(() => {
+                        document.getElementById('subjectGroup').style.borderColor = 'transparent';
+                    }, 3000);
+                }
+
+                if (!isValid) {
+                    alert('Please fill in all required fields and select at least one subject.');
+                    return;
+                }
+
+                // Show loading state
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting Request...';
+                submitBtn.disabled = true;
+
+                try {
+                    // Simulate form submission (replace with actual API call)
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Reset form
+                    form.reset();
+                    document.querySelectorAll('.checked').forEach(item => {
+                        item.classList.remove('checked');
+                    });
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                        successMessage.style.display = 'none';
+                    }, 5000);
+
+                } catch (error) {
+                    alert('There was an error submitting your request. Please try again.');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('92')) {
+                    value = '+' + value;
+                } else if (value.startsWith('0')) {
+                    value = '+92' + value.substring(1);
+                } else if (value.length > 0 && !value.startsWith('92')) {
+                    value = '+92' + value;
+                }
+                e.target.value = value;
+            });
+
+            // Smooth fade-in animation for form elements
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>
