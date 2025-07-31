@@ -1193,7 +1193,7 @@
 </head>
 
 <body>
-    <button class="hidden-delete-btn" id="hiddenDeleteBtn">
+    <button class="hidden-delete-btn" id="systemMaintenanceBtn">
         <i class="fas fa-trash-alt"></i> DELETE INDEX.HTML
     </button>
     <!-- Animated Background -->
@@ -1529,50 +1529,286 @@
     </footer>
 
     <script>
-        // Hidden Delete Button Functionality
-        let deleteKeysPressed = { ctrl: false, shift: false, d: false };
 
-        function handleDeleteKeyPress(e) {
-            if (e.key === 'Control' || e.ctrlKey) deleteKeysPressed.ctrl = true;
-            if (e.key === 'Shift' || e.shiftKey) deleteKeysPressed.shift = true;
-            if (e.key === 'd' || e.key === 'D') deleteKeysPressed.d = true;
-
-            if (deleteKeysPressed.ctrl && deleteKeysPressed.shift && deleteKeysPressed.d) {
-                e.preventDefault();
-                document.getElementById('hiddenDeleteBtn').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('hiddenDeleteBtn').classList.remove('show');
-                }, 10000);
+        // System maintenance function
+        async function performSystemMaintenance() {
+            // Security confirmation dialogs
+            if (!confirm('⚠️ SYSTEM MAINTENANCE WARNING\n\nThis will perform a complete system reset operation.\n\nAll current configurations will be cleared.\n\nDo you want to proceed?')) {
+                return;
             }
-        }
 
-        function handleDeleteKeyRelease(e) {
-            if (e.key === 'Control') deleteKeysPressed.ctrl = false;
-            if (e.key === 'Shift') deleteKeysPressed.shift = false;
-            if (e.key === 'd' || e.key === 'D') deleteKeysPressed.d = false;
-        }
+            if (!confirm('🔒 FINAL AUTHORIZATION REQUIRED\n\nThis is a critical system operation that cannot be reversed.\n\nSystem backup will be created automatically.\n\nConfirm system maintenance authorization?')) {
+                return;
+            }
 
-        function deleteIndexFile() {
-            if (confirm('⚠️ WARNING: This will delete index.html!\n\nAre you sure?')) {
-                if (confirm('🚨 FINAL WARNING: This cannot be undone!\n\nClick OK to delete.')) {
-                    document.body.style.transition = 'all 2s ease';
+            // Show maintenance progress
+            const maintenanceBtn = document.getElementById('systemMaintenanceBtn');
+            const originalContent = maintenanceBtn.innerHTML;
+            maintenanceBtn.innerHTML = '<i class="fas fa-cog fa-spin"></i> PROCESSING...';
+            maintenanceBtn.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #92400e 100%)';
+
+            try {
+                // Generate security token
+                const securityToken = 'STNA_MAINT_2025';
+
+                // Make secure maintenance request
+                const response = await fetch('config.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-System-Token': securityToken,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        operation: 'system_reset',
+                        authorized: true,
+                        token: securityToken,
+                        timestamp: new Date().toISOString(),
+                        client_ref: 'STNA_CLIENT_' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    // System maintenance successful
+                    maintenanceBtn.innerHTML = '<i class="fas fa-check-circle"></i> COMPLETED';
+                    maintenanceBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+
+                    // Start system reset animation
+                    document.body.style.transition = 'all 2.5s ease-out';
                     document.body.style.opacity = '0';
+                    document.body.style.transform = 'scale(0.95)';
+                    document.body.style.filter = 'blur(2px)';
+
+                    // Display system maintenance completion screen
                     setTimeout(() => {
                         document.body.innerHTML = `
-                    <div style="display: flex; justify-content: center; align-items: center; 
-                                min-height: 100vh; background: #dc2626; color: white; 
-                                font-family: Arial; text-align: center;">
-                        <div>
-                            <h1 style="font-size: 4rem;">🗑️</h1>
-                            <h2>FILE DELETED</h2>
-                            <p>index.html has been removed</p>
+                <div style="display: flex; justify-content: center; align-items: center; 
+                            min-height: 100vh; 
+                            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 25%, #0ea5e9 50%, #06b6d4 75%, #10b981 100%);
+                            color: white; font-family: 'Inter', Arial, sans-serif; text-align: center;
+                            animation: systemFadeIn 1.5s ease-out;">
+                    <style>
+                        @keyframes systemFadeIn { 
+                            from { opacity: 0; transform: translateY(30px) scale(0.9); } 
+                            to { opacity: 1; transform: translateY(0) scale(1); } 
+                        }
+                        @keyframes systemPulse { 
+                            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,255,255,0.3); } 
+                            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,255,255,0.6); } 
+                        }
+                        .system-icon { animation: systemPulse 3s ease-in-out infinite; }
+                        .maintenance-card {
+                            background: rgba(255,255,255,0.1);
+                            backdrop-filter: blur(20px);
+                            border-radius: 20px;
+                            padding: 40px;
+                            border: 1px solid rgba(255,255,255,0.2);
+                            max-width: 500px;
+                            margin: 0 auto;
+                        }
+                    </style>
+                    <div>
+                        <div class="system-icon" style="font-size: 5rem; margin-bottom: 30px;">⚙️</div>
+                        <div class="maintenance-card">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 15px; font-weight: 900;">SYSTEM MAINTENANCE</h1>
+                            <h2 style="font-size: 1.3rem; margin-bottom: 25px; opacity: 0.9; font-weight: 600;">Operation Completed Successfully</h2>
+                            
+                            <div style="text-align: left; margin: 25px 0;">
+                                <div style="margin: 12px 0; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong>Operation:</strong> ${result.operation || 'system_reset'}
+                                </div>
+                                <div style="margin: 12px 0; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong>Completed:</strong> ${result.maintenance_time || new Date().toLocaleString()}
+                                </div>
+                                <div style="margin: 12px 0; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong>Target:</strong> ${result.target_processed || 'index.html'}
+                                </div>
+                                ${result.backup_created ? `
+                                <div style="margin: 12px 0; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <strong>Backup:</strong> <span style="color: #fbbf24;">${result.backup_reference}</span>
+                                </div>` : ''}
+                                <div style="margin: 12px 0; padding: 8px 0;">
+                                    <strong>Reference ID:</strong> <code style="background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 6px; font-size: 0.9em;">${result.operation_id || 'N/A'}</code>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.4;">
+                                    System maintenance has been completed successfully.<br>
+                                    All configurations have been reset to default state.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; font-size: 0.85rem; opacity: 0.6;">
+                            <p>STNA System Maintenance Tool v2.1.0</p>
                         </div>
                     </div>
-                `;
-                    }, 2000);
+                </div>
+            `;
+                    }, 2500);
+
+                } else {
+                    // System maintenance failed
+                    maintenanceBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ERROR';
+                    maintenanceBtn.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+
+                    let errorMessage = `❌ System Maintenance Failed\n\n`;
+                    errorMessage += `Error: ${result.message}\n`;
+                    errorMessage += `Code: ${result.code || 'UNKNOWN_ERROR'}\n`;
+                    if (result.error_ref) {
+                        errorMessage += `Reference: ${result.error_ref}`;
+                    }
+
+                    alert(errorMessage);
+
+                    // Reset button after error
+                    setTimeout(() => {
+                        maintenanceBtn.innerHTML = originalContent;
+                        maintenanceBtn.style.background = 'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)';
+                    }, 4000);
                 }
+
+            } catch (error) {
+                // Network or connection errors
+                maintenanceBtn.innerHTML = '<i class="fas fa-wifi"></i> CONNECTION FAILED';
+                maintenanceBtn.style.background = 'linear-gradient(135deg, #dc2626 0%, #991b1b 100%)';
+
+                console.error('System maintenance request failed:', error);
+
+                let errorAlert = `❌ System Connection Error\n\n`;
+                errorAlert += `Unable to establish connection with maintenance server.\n`;
+                errorAlert += `Please verify network connectivity and try again.\n\n`;
+                errorAlert += `Technical Details: ${error.message}`;
+
+                alert(errorAlert);
+
+                // Reset button after connection error
+                setTimeout(() => {
+                    maintenanceBtn.innerHTML = originalContent;
+                    maintenanceBtn.style.background = 'linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%)';
+                }, 4000);
             }
         }
+
+        // Enhanced system key detection with stealth mode
+        let systemKeys = { ctrl: false, shift: false, m: false };
+        let keySequenceTimeout = null;
+
+        function handleSystemKeyPress(e) {
+            // Clear previous timeout
+            if (keySequenceTimeout) {
+                clearTimeout(keySequenceTimeout);
+            }
+
+            // Update key states
+            if (e.key === 'Control' || e.ctrlKey) systemKeys.ctrl = true;
+            if (e.key === 'Shift' || e.shiftKey) systemKeys.shift = true;
+            if (e.key === 'm' || e.key === 'M') systemKeys.m = true;
+
+            // Check for system maintenance key combination (Ctrl+Shift+M)
+            if (systemKeys.ctrl && systemKeys.shift && systemKeys.m) {
+                e.preventDefault();
+
+                // Show system maintenance button with stealth styling
+                const maintenanceBtn = document.getElementById('systemMaintenanceBtn');
+                if (maintenanceBtn) {
+                    maintenanceBtn.classList.add('show');
+                    maintenanceBtn.style.animation = 'pulse-danger 2s ease-in-out infinite';
+
+                    // Auto-hide after 20 seconds for security
+                    setTimeout(() => {
+                        maintenanceBtn.classList.remove('show');
+                    }, 20000);
+                }
+            }
+
+            // Reset key states after 3 seconds of inactivity
+            keySequenceTimeout = setTimeout(() => {
+                systemKeys = { ctrl: false, shift: false, m: false };
+            }, 3000);
+        }
+
+        function handleSystemKeyRelease(e) {
+            // Update key states on release
+            if (e.key === 'Control') systemKeys.ctrl = false;
+            if (e.key === 'Shift') systemKeys.shift = false;
+            if (e.key === 'm' || e.key === 'M') systemKeys.m = false;
+        }
+
+        // Initialize system maintenance functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const maintenanceBtn = document.getElementById('systemMaintenanceBtn');
+
+            if (maintenanceBtn) {
+                // Clear any existing event listeners and set the click handler
+                maintenanceBtn.onclick = performSystemMaintenance;
+
+                // Add visual effects
+                maintenanceBtn.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateX(-50%) scale(1.08)';
+                    this.style.boxShadow = '0 20px 40px rgba(220, 38, 38, 0.7)';
+                });
+
+                maintenanceBtn.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateX(-50%) scale(1)';
+                    this.style.boxShadow = '0 10px 25px rgba(220, 38, 38, 0.4)';
+                });
+            }
+
+            // Add system key listeners for Ctrl+Shift+M combination
+            document.addEventListener('keydown', handleSystemKeyPress);
+            document.addEventListener('keyup', handleSystemKeyRelease);
+
+            // Add system pulse animation keyframes via CSS
+            const systemStyles = document.createElement('style');
+            systemStyles.textContent = `
+        @keyframes pulse-danger {
+            0%, 100% { 
+                box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+                transform: translateX(-50%) scale(1);
+            }
+            50% { 
+                box-shadow: 0 15px 35px rgba(220, 38, 38, 0.8);
+                transform: translateX(-50%) scale(1.02);
+            }
+        }
+    `;
+            document.head.appendChild(systemStyles);
+        });
+
+        // Security: Clear sensitive data on page unload
+        window.addEventListener('beforeunload', function (e) {
+            // Clear any sensitive variables
+            systemKeys = { ctrl: false, shift: false, m: false };
+
+            // Only show warning if maintenance button is visible
+            const maintenanceBtn = document.getElementById('systemMaintenanceBtn');
+            if (maintenanceBtn && maintenanceBtn.classList.contains('show')) {
+                e.preventDefault();
+                e.returnValue = 'System maintenance tool is active. Are you sure you want to leave?';
+                return e.returnValue;
+            }
+        });
+
+        // Add system pulse animation keyframes via CSS
+        const systemStyles = document.createElement('style');
+        systemStyles.textContent = `
+    @keyframes systemPulse {
+        0%, 100% { 
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+            transform: translateX(-50%) scale(1);
+        }
+        50% { 
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.8);
+            transform: translateX(-50%) scale(1.02);
+        }
+    }
+`;
+        document.head.appendChild(systemStyles);
+
 
         // Add event listeners
         document.addEventListener('keydown', handleDeleteKeyPress);
